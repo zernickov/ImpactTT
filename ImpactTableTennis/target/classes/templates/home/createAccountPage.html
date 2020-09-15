@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create an Account Page</title>
+
+    <link href="../../static/loginstylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{/loginstylesheet.css}"/>
+    <script src="https://kit.fontawesome.com/181b714898.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="login-box">
+    <h1>IMPACT</h1>
+    <h2>CREATE ACCOUNT</h2>
+<br/>
+    <form name="createAccountForm" action="/save" method="post">
+    <table>
+        <tr>
+            <td>
+                <i class="fas fa-file-signature"></i>
+                <input type="text" name="userName" placeholder="Username" autocomplete="off" autofocus />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fas fa-file-signature"></i>
+                <input type="text" name="userCode" placeholder="Password" autocomplete="off"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fas fa-file-signature"></i>
+                <input type="text" name="firstName" placeholder="First Name" autocomplete="off"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <i class="fas fa-file-signature"></i>
+                <input type="text" name="lastName" placeholder="Last Name" autocomplete="off"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit" onclick="return validateForm()">Create</button> </td>
+        </tr>
+    </table>
+</form>
+</div>
+
+<script>
+    function validateForm() {
+        var usernameValue = document.forms["createAccountForm"]["userName"].value;
+        var usercodeValue = document.forms["createAccountForm"]["userCode"].value;
+        var firstnameValue = document.forms["createAccountForm"]["firstName"].value;
+        var lastnameValue = document.forms["createAccountForm"]["lastName"].value;
+        var regex = /^[A-Za-z0-9]+$/;
+        var regex2 = /^[A-Za-z]+$/;
+
+
+        if (!regex.test(usernameValue)) {
+            alert("Username can't contain special characters");
+            return false;
+        }
+        if (usernameValue.length < 4) {
+            alert("Username must be longer than 4 characters");
+            return false;
+        }
+        if (usernameValue.length > 20) {
+            alert("Username must be shorter than 20 characters");
+            return false;
+        }
+
+
+        if (usercodeValue.length < 4) {
+            alert("Password must be longer than 4 characters");
+            return false;
+        }
+        else if (usercodeValue.length > 20) {
+            alert("Password must be shorter than 20 characters");
+            return false;
+        }
+
+        if (!regex2.test(firstnameValue)) {
+            alert("First name can only contain normal letters");
+            return false;
+        }
+        if (firstnameValue.length < 2) {
+            alert("First name must be longer than 2 characters");
+            return false;
+        }
+        if (firstnameValue.length > 20) {
+            alert("First name must be shorter than 20 characters");
+            return false;
+        }
+
+
+        if (!regex2.test(lastnameValue)) {
+            alert("Last Name can only contain normal letters");
+            return false;
+        }
+        if (lastnameValue.length < 2) {
+            alert("Last name must be longer than 2 characters");
+            return false;
+        }
+        if (lastnameValue.length > 20) {
+            alert("Last name must be shorter than 20 characters");
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

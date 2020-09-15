@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>System Log</title>
+
+    <link href="../../static/mainstylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{/mainstylesheet.css}"/>
+    <script src="https://kit.fontawesome.com/181b714898.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="navbar">
+    <a th:href="@{'/'}" style="float: left; margin-left: 5%"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a th:href="@{'/allPlayersList/'}"><i class="fas fa-users"></i> Players</a>
+    <a th:href="@{'/allMatchesList/'}"><i class="fas fa-table-tennis"></i> Matches</a>
+    <a th:href="@{'/helpPage/'}"><i class="fas fa-info-circle"></i></a>
+    <a th:href="@{'/systemLogPage/'}"><i class="fas fa-cog"></i></a>
+</div>
+
+<div class="systemColumn1">
+    <div class="log">
+    <table cellpadding="10">
+        <thead>
+        <tr>
+            <th>System Action</th>
+            <th>Time of Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="systemLog : ${systemLog}">
+            <td th:text="${systemLog.systemAction}">First Name</td>
+            <td th:text="${systemLog.timeOfAction}">First Name</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="systemColumn2">
+    <h2>Delete Player</h2>
+    <form name="deleteplayer" action="/deletePlayer" method="post">
+        <table>
+            <tr>
+                <td>
+                    <p>Please enter the Username of the player you want to delete</p>
+                    <input type="text" name="userName" placeholder="Username" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Enter the admin code, to complete the process</p>
+                    <input type="password" name="adminPassword" placeholder="Admin Code" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td><button type="submit" onclick="return validateForm()">Confirm</button> </td>
+            </tr>
+        </table>
+    </form>
+
+
+    <h2>Revenge ELO Cheater</h2>
+    <form name="revengeplayer" action="/revengePlayer" method="post">
+        <table>
+            <tr>
+                <td>
+                    <p>Please enter the Username of the player who's ELO you want to decrease by 200</p>
+                    <input type="text" name="userName" placeholder="Username" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Enter the admin code, to complete the process</p>
+                    <input type="password" name="adminPassword" placeholder="Admin Code" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td><button type="submit" onclick="return validateSecondForm()">Confirm</button> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<script>
+    function validateForm() {
+        var adminpasswordvalue = document.forms["deleteplayer"]["adminPassword"].value;
+        var adminCheck = "adminsaregay";
+
+
+        if (adminpasswordvalue!==adminCheck) {
+            alert("YOU ARE NOT THE ADMIN!");
+            return false;
+        }
+
+    }
+
+    function validateSecondForm() {
+        var adminpasswordvalue2 = document.forms["revengeplayer"]["adminPassword"].value;
+        var adminCheck = "adminsaregay";
+
+        if (adminpasswordvalue2!==adminCheck) {
+            alert("YOU ARE NOT THE ADMIN!");
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List of all Players</title>
+
+    <link href="../../static/mainstylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{/mainstylesheet.css}"/>
+    <script src="https://kit.fontawesome.com/181b714898.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="navbar">
+    <a th:href="@{'/'}" style="float: left; margin-left: 5%"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a th:href="@{'/allPlayersList/'}"><i class="fas fa-users"></i> Players</a>
+    <a th:href="@{'/allMatchesList/'}"><i class="fas fa-table-tennis"></i> Matches</a>
+    <a th:href="@{'/helpPage/'}"><i class="fas fa-info-circle"></i></a>
+    <a th:href="@{'/systemLogPage/'}"><i class="fas fa-cog"></i></a>
+</div>
+
+
+<div class="list">
+<table cellpadding="10">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>ELO</th>
+        <th>Matches</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player : ${player}">
+        <td th:text="${player.firstName}">First Name</td>
+        <td th:text="${player.lastName}">Last Name</td>
+        <td th:text="${player.ELO}">ELO</td>
+        <td th:text="${player.playedMatches}">Matches</td>
+    </tr>
+    </tbody>
+</table>
+</div>
+</body>
+</html>

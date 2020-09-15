@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>System Log</title>
+
+    <link href="../../static/mainstylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{/mainstylesheet.css}"/>
+    <script src="https://kit.fontawesome.com/181b714898.js" crossorigin="anonymous"></script>
+    <style>
+        button {
+            width: 15%;
+            color: white;
+            padding: 8px;
+            font-size: 20px;
+            outline: none;
+            background-color: black;
+            border-radius: 10px 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="navbar">
+    <a th:href="@{'/'}" style="float: left; margin-left: 5%"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a th:href="@{'/allPlayersList/'}"><i class="fas fa-users"></i> Players</a>
+    <a th:href="@{'/allMatchesList/'}"><i class="fas fa-table-tennis"></i> Matches</a>
+    <a th:href="@{'/helpPage/'}"><i class="fas fa-info-circle"></i></a>
+    <a th:href="@{'/systemLogPage/'}"><i class="fas fa-cog"></i></a>
+</div>
+
+<div class="disclaimer" style="color: red">
+<p>Disclaimer: This website is only for internal use, meaning that we players should be able to trust each other</p>
+<p>This includes: Never declare yourself the Winner of a match that you did not win! same goes for losing</p>
+<p>Note that it is not recommended to find a new match, before you have declared whether you lost or won your last match</p>
+<p>FYI: The admin has the right to subtract your ELO points as well as delete your profile.. so behave!</p>
+</div>
+    <h1>How To Find A Match?</h1>
+<p>To start af match you need to click the "Find Match" button located in the column called "Quick Match" right under your profile information</p>
+<p>The "Find Match" button looks like this:</p>
+
+<button>Find Match</button>
+
+<p>After this your profile will be transfered to the second column: "Next Match", where you will stay until the system has found an opponent for you</p>
+<p>Note that if the opponent was found before or at the same time that you searched for a match you will be directly transfered to the "Upcoming Matches" overview</p>
+<p>"Upcoming Matches" represents the queue of unfinished matched</p>
+<p>After you have finished your match you need to declare whether you've lost or won the match</p>
+<p>This is done by pressing the appropriate button, the two buttons look like this:</p>
+
+<button>I WON</button>
+<button>I LOST</button>
+
+<p>The match has now been stored in the system and your ELO has been updated</p>
+<p>ELO DESCRIPTION: The ELO-rating system is a method of calculating the relative skill levels of players in zero-sum games, meaning the higher the ELO the better the player</p>
+<p>Now that you know the rules... Go own that leaderboard!</p>
+
+
+</body>
+</html>

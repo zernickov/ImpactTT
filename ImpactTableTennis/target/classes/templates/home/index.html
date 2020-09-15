@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+
+    <link href="../../static/loginstylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{/loginstylesheet.css}"/>
+    <script src="https://kit.fontawesome.com/181b714898.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="login-box">
+    <h1>IMPACT</h1>
+    <h3>T A B L E T E N N I S</h3>
+    <br/>
+    <form action="/login/" method="post">
+        <table>
+            <tr>
+                <td>
+                    <i class="fas fa-user"></i>
+                    <input type="text" name="userName" placeholder="Username" autocomplete="off" autofocus/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fas fa-lock"></i>
+                    <input type="password" name="userCode" placeholder="Password" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td><button type="submit">Sign In</button> </td>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <a th:href="@{'/createAccountPage/'}">Not a user? Sign up</a>
+
+</div>
+
+
+
+</body>
+</html>

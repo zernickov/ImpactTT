@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Player Homepage</title>
+
+    <link href="../../static/mainstylesheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" th:href="@{/mainstylesheet.css}"/>
+    <script src="https://kit.fontawesome.com/181b714898.js" crossorigin="anonymous"></script>
+</head>
+<body onload="timeRefresh(10000)">
+
+
+<div class="navbar">
+    <a th:href="@{'/'}" style="float: left; margin-left: 5%"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    <a th:href="@{'/allPlayersList/'}"><i class="fas fa-users"></i> Players</a>
+    <a th:href="@{'/allMatchesList/'}"><i class="fas fa-table-tennis"></i> Matches</a>
+    <a th:href="@{'/helpPage/'}"><i class="fas fa-info-circle"></i></a>
+    <a th:href="@{'/systemLogPage/'}"><i class="fas fa-cog"></i></a>
+</div>
+
+<div class="column1">
+    <h1>QUICK MATCH</h1>
+    <br>
+    <i class="fas fa-table-tennis"></i>
+    <br><br><br>
+    <table>
+    <tbody th:each="player : ${player}">
+    <tr>
+        <td style="font-weight: bolder" th:text="${player.firstName}">First Name</td>
+        <td style="font-weight: bolder" th:text="${player.lastName}">Last Name</td>
+    </tr>
+    <tr>
+        <td>ELO: </td>
+        <td th:text="${player.ELO}">ELO</td>
+    </tr>
+    <tr>
+        <td>Matches:</td>
+        <td th:text="${player.playedMatches}">Matches Played</td>
+    </tr>
+    </tbody>
+</table>
+    <br>
+    <form action="/findMatch" method="post">
+        <button type="submit">Find Match</button>
+    </form>
+
+</div>
+
+
+
+<div class="column2">
+    <h1>NEXT MATCH</h1>
+    <div class="next">
+    <table cellpadding="10">
+        <thead>
+        <tr>
+            <th>Player 1</th>
+            <th>ELO</th>
+            <th>VS</th>
+            <th>Player 2</th>
+            <th>ELO</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="nextMatch : ${nextMatch}">
+            <td th:text="${nextMatch.player1Name}">Awaiting Player</td>
+            <td th:text="${nextMatch.player1ELO}"></td>
+            <td>VS</td>
+            <td th:text="${nextMatch.player2Name}">Awaiting Player</td>
+            <td th:text="${nextMatch.player2ELO}"></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+    <h2>MY MATCH</h2>
+    <form action="/declareWinner" method="post">
+        <button type="submit">I WON</button>
+    </form>
+    <form action="/declareLoser" method="post">
+        <button type="submit">I LOST</button>
+    </form>
+    <br>
+
+    <h1 style="font-size: 39px">UPCOMING MATCHES</h1>
+    <div class="upcoming">
+    <table cellpadding="10">
+        <thead>
+        <tr>
+            <th>Player 1</th>
+            <th>Player 2</th>
+            <th>Winner</th>
+            <th>Loser</th>
+            <th>Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="upcomingMatches : ${upcomingMatches}">
+            <td th:text="${upcomingMatches.player1Name}">First Name</td>
+            <td th:text="${upcomingMatches.player2Name}">Last Name</td>
+            <td th:text="${upcomingMatches.winner}">Rank</td>
+            <td th:text="${upcomingMatches.loser}">ELO</td>
+            <td th:text="${upcomingMatches.dateOfMatch}">Time</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+
+</div>
+
+<div class="column3">
+    <h1>MESSAGE BOARD</h1>
+
+<div class="chat">
+    <table cellpadding="10">
+        <tbody>
+        <tr th:each="chat : ${chat}">
+            <div class="oneMessage">
+            <p th:text="${chat.username}" style="font-weight: bolder">Username</p>
+            <p th:text="${chat.message}">Messages</p>
+            <p th:text="${chat.timeOfMessage}" style="color: gray">Timestamp</p>
+            <br>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    <div class="sendmessage">
+    <form action="/saveMessage" method="post">
+        <table>
+            <tr>
+                <td>
+                    <input onfocus="stopRefresh()" type="text" name="message" placeholder="type here..." autocomplete="off"/>
+                </td>
+                <td colspan="2"><button type="submit">Send</button> </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</div>
+
+<div class="column4">
+    <div class="playerhometable">
+<h1>TOP 10</h1>
+    <table cellpadding="10">
+        <thead>
+        <tr>
+            <th>ELO</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="top10Players : ${top10Players}">
+            <td th:text="${top10Players.ELO}">ELO</td>
+            <td th:text="${top10Players.firstName}">First Name</td>
+            <td th:text="${top10Players.lastName}">Last Name</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<div class="column5">
+    <div class="playerhometable">
+<h1>RECENT MATCHES</h1>
+<table cellpadding="10">
+    <thead>
+    <tr>
+        <th>Player 1</th>
+        <th>Player 2</th>
+        <th>Winner</th>
+        <th>Loser</th>
+        <th>Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="allCompletedMatches : ${allCompletedMatches}">
+        <td th:text="${allCompletedMatches.player1Name}">First Name</td>
+        <td th:text="${allCompletedMatches.player2Name}">Last Name</td>
+        <td th:text="${allCompletedMatches.winner}">Rank</td>
+        <td th:text="${allCompletedMatches.loser}">ELO</td>
+        <td th:text="${allCompletedMatches.dateOfMatch}">Time</td>
+    </tr>
+    </tbody>
+</table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var table = document.querySelector(".chat");
+        table.scrollTop = table.scrollHeight;
+    }, false)
+
+    var sharedVar = true;
+
+    function timeRefresh(num) {
+            setTimeout( function() {
+            if (sharedVar) location.reload(true);
+    }, num);
+    }
+
+    function stopRefresh(){
+        sharedVar  = false;
+    }
+
+</script>
+
+</body>
+</html>
